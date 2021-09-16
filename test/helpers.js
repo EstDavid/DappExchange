@@ -9,3 +9,8 @@ export const ether = (n) => {
 }
 
 export const tokens = (n) => ether(n);
+
+export const wait = (seconds) => {
+    const milliseconds = seconds * 1000;
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
