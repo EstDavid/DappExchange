@@ -8,17 +8,28 @@ import {
     exchangeLoaded
 } from './actions';
 
-export const loadWeb3 = (dispatch) => {
-    const web3 = new Web3(Web3.givenProvider || 'http://localhost:7545');
-    dispatch(web3Loaded(web3));
-    return web3;
+export const loadWeb3 = async (dispatch) => {
+    if(typeof window.ethereum!=='undefined'){
+        await window.ethereum.request({method: 'eth_requestAccounts'});
+        const web3 = new Web3(window.ethereum);        
+        dispatch(web3Loaded(web3));
+        return web3
+      } else {
+        window.alert('Please install MetaMask')
+        window.location.assign("https://metamask.io/")
+      }
 }
 
 export const loadAccount = async (web3, dispatch) => {
     const accounts = await web3.eth.getAccounts();
-    const account = accounts[0];
-    dispatch(web3AccountLoaded(account));
-    return account;
+    const account = await accounts[0];
+    if(typeof account !== 'undefined'){
+        dispatch(web3AccountLoaded(account))
+        return account;
+    } else {
+        window.alert('Please login with MetaMask')
+        return null;
+    }
 }
 
 export const loadToken = async (web3, networkId, dispatch) => {
@@ -28,9 +39,9 @@ export const loadToken = async (web3, networkId, dispatch) => {
         return token;
     }
     catch(error) {
-        window.alert(`Contract not deployed to the current network. Please select another network with Metamask.`);
-    }
-    return null;
+        console.log(`Token contract not deployed to the current network. Please select another network with Metamask.`);
+        return null;
+}
 }
 
 export const loadExchange = async (web3, networkId, dispatch) => {
@@ -40,7 +51,7 @@ export const loadExchange = async (web3, networkId, dispatch) => {
         return exchange;
     }
     catch(error) {
-        window.alert(`Contract not deployed to the current network. Please select another network with Metamask.`);
+        console.log(`Exchange contract not deployed to the current network. Please select another network with Metamask.`);
     }
     return null;
 }

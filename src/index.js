@@ -7,8 +7,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { iteratee } from 'lodash';
 // import reportWebVitals from './reportWebVitals';
 
-const store = configureStore();
-
 ReactDOM.render(
   <Provider store={configureStore()}>
       <App />

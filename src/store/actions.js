@@ -14,7 +14,7 @@ export function web3AccountLoaded(account) {
     }
 }
 
-// ACCOUNT
+// TOKEN
 export function tokenLoaded (contract) {
     return {
         type: 'TOKEN_LOADED',
