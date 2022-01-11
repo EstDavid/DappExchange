@@ -358,3 +358,10 @@ export const tokenDepositAmountSelector = createSelector(tokenDepositAmount, sta
 
 const tokenWithdrawAmount = state => get(state, 'exchange.tokenWithdrawAmount', null);
 export const tokenWithdrawAmountSelector = createSelector(tokenWithdrawAmount, status => status);
+
+// New Orders
+const buyOrder = state => get(state, 'exchange.buyOrder', {});
+export const buyOrderSelector = createSelector(buyOrder, order => order);
+
+const sellOrder = state => get(state, 'exchange.sellOrder', {});
+export const sellOrderSelector = createSelector(sellOrder, order => order);
