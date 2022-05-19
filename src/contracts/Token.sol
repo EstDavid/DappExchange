@@ -6,8 +6,8 @@ contract Token {
     using SafeMath for uint;
     
     // Variables
-    string public name = "Tic Tac Token";
-    string public symbol = "TTT";
+    string public name = "Dolphinance Token";
+    string public symbol = "DLP";
     uint256 public decimals = 18;
     uint256 public totalSupply;
 
