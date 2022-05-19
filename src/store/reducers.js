@@ -13,6 +13,17 @@ function web3(state = {}, action) {
   }
 }
 
+function navigation(state = {}, action) {
+  switch (action.type) {
+    case 'APP_REQUESTED':
+      return {...state, showApp: true};
+    case 'HOMEPAGE_REQUESTED':
+      return {...state, showApp: false};
+    default:
+      return state
+  }
+}
+
 function token(state = {}, action) {
   switch (action.type) {
     case 'TOKEN_LOADED':
@@ -126,6 +137,7 @@ function exchange(state = {}, action) {
 
 const rootReducer = combineReducers({
     web3,
+    navigation,
     token,
     exchange
 });

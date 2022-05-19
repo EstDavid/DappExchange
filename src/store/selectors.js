@@ -6,6 +6,9 @@ import moment from 'moment';
 const web3 = state => get(state, 'web3.connection');
 export const web3Selector = createSelector(web3, wb => wb);
 
+const navigation = state => get(state, 'navigation.showApp');
+export const navigationSelector = createSelector(navigation, nv => nv);
+
 const account = state => get(state, 'web3.account');
 export const accountSelector = createSelector(account, a => a);
 
@@ -91,7 +94,7 @@ const decorateOrder = (order) => {
         etherAmount: ether(etherAmount),
         tokenAmount: tokens(tokenAmount),
         tokenPrice,
-        formattedTimestamp: moment.unix(order.timestamp).format('h:mm:ss a D/M')
+        formattedTimestamp: moment.unix(order.timestamp).format('YYYY-MM-DD HH:mm:ss')
     })
 }
 

@@ -6,6 +6,19 @@ export function web3Loaded(connection) {
     }
 }
 
+// NAVIGATION
+export function appRequested() {
+    return {
+        type: 'APP_REQUESTED',
+    }
+}
+
+export function homepageRequested() {
+    return {
+        type: 'HOMEPAGE_REQUESTED',
+    }
+}
+
 // ACCOUNT
 export function web3AccountLoaded(account) {
     return {
