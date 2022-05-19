@@ -2,34 +2,18 @@ import React, {Component} from 'react';
 import './App.css';
 import Navbar from './Navbar';
 import Content from './Content';
-import { 
-  loadWeb3,
-  loadAccount,
-  loadToken,
-  loadExchange
-  } from '../store/interactions'
+import DefaultContent from './DefaultContent';
+
 import { connect } from 'react-redux';
-import { contractsLoadedSelector } from '../store/selectors';
+import { navigationSelector } from '../store/selectors';
 
 class App extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.loadBlockchainData(this.props.dispatch);
   }
   async loadBlockchainData(dispatch) {
     // Get a web3 provider
-    const web3 = await loadWeb3(dispatch);
-    const networkId = await web3.eth.net.getId();
-    await loadAccount(web3, dispatch);
-    const token = await loadToken(web3, networkId, dispatch);
-    if(!token) {
-      window.alert('Token smart contract not detected on the current network. Please select another network with Metamask.');
-      return;
-    }
-    const exchange = await loadExchange(web3, networkId, dispatch);
-    if(!exchange) {
-      window.alert('Exchange smart contract not detected on the current network. Please select another network with Metamask.');
-      return;
-    }
+
     // const totalSupply = await token.methods.totalSupply().call();
     // console.log("totalSupply", totalSupply);
 
@@ -39,15 +23,18 @@ class App extends Component {
     return (
       <div>
         <Navbar/>
-        {this.props.contractsLoaded ? <Content/> : <div className="content"></div>}
-      </div>
+        {this.props.showApp ? <Content/> : <DefaultContent/>}
+        </div>
     );
   }
 }
 
+//         {this.props.contractsLoaded ? <Content/> : <DefaultContent/>}
+
+
 function mapStateToProps(state) {
   return {
-    contractsLoaded: contractsLoadedSelector(state)
+    showApp: navigationSelector(state)
   }
 }
 

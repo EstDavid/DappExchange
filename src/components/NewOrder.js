@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Spinner from './Spinner';
 import { Tabs, Tab } from 'react-bootstrap';
+import BigNumber from 'bignumber.js';
 import { 
     makeBuyOrder,
     makeSellOrder
@@ -17,7 +18,6 @@ import {
 import { 
     buyOrderAmountChanged,
     buyOrderPriceChanged,
-    buyOrderMaking,
     sellOrderAmountChanged,
     sellOrderPriceChanged
  } from '../store/actions';
@@ -60,8 +60,8 @@ import {
                     />
                 </div>
             </div>
-            <button type="submit" className="btn btn-primary btn-sm btn-block">{type} Order</button>
-            {showTotal ? <small>Total: {order.amount * order.price} ETH</small> : null}
+            <button type="submit" className="btn btn-secondary btn-sm btn-block">{type} Order</button>
+            {showTotal ? <small>Total: {(new BigNumber(order.amount).times(new BigNumber(order.price))).toString()} ETH</small> : null}
         </form>
     )
 }
@@ -69,10 +69,10 @@ import {
 const showForm = (props) => {
     return(
         <Tabs defaultActiveKey="buy" className="bg-dark text-white">
-            <Tab eventKey="buy" title="Buy" className="bg-dark">
+            <Tab eventKey="buy" title="Buy Token" className="bg-dark">
                 {createForm("Buy", makeBuyOrder, buyOrderAmountChanged, buyOrderPriceChanged, props, props.buyOrder)}
             </Tab>
-            <Tab eventKey="sell" title="Sell" className="bg-dark">
+            <Tab eventKey="sell" title="Sell Token" className="bg-dark">
             {createForm("Sell", makeSellOrder, sellOrderAmountChanged, sellOrderPriceChanged, props, props.sellOrder)}
             </Tab>
         </Tabs>

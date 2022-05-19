@@ -5,15 +5,17 @@ import Spinner from './Spinner'
 import {
     orderBookSelector,
     orderBookLoadedSelector,
+    web3Selector,
     exchangeSelector,
+    tokenSelector,
     accountSelector,
     orderFillingSelector
 } from '../store/selectors';
-import { fillOrder } from '../store/interactions';
+import { fillOrder, loadBalances } from '../store/interactions';
 
 const renderOrder = (order, props) => {
-    const {dispatch, exchange, account} = props;
-    return(
+    const { dispatch, web3, exchange, token, account } = props;
+    return (
         <OverlayTrigger
             key={order.id}
             placement='auto'
@@ -21,12 +23,15 @@ const renderOrder = (order, props) => {
                 <Tooltip id={order.id}>
                     {`Click here to ${order.orderFillAction}`}
                 </Tooltip>
-            } 
+            }
         >
             <tr key={order.id}
                 className="order-book-order"
-                onClick={(e) => fillOrder(dispatch, exchange, order, account)}
-                >
+                onClick={(e) => {
+                    fillOrder(dispatch, web3, exchange, token, order, account)
+                }
+                }
+            >
                 <td>{order.tokenAmount}</td>
                 <td className={`text-${order.orderTypeClass}`}>{order.tokenPrice}</td>
                 <td>{order.etherAmount}</td>
@@ -39,11 +44,17 @@ const showOrderBook = (props) => {
     const {orderBook} = props;
     return(
         <tbody>
+            <tr>
+                <th>Asks</th>
+            </tr>
             {orderBook.sellOrders.map((order) => renderOrder(order, props))}
             <tr>
-                <th>DAPP</th>
+                <th>DAPP Qty</th>
                 <th>DAPP/ETH</th>
-                <th>ETH</th>
+                <th>ETH Qty</th>
+            </tr>
+            <tr>
+                <th>Bids</th>
             </tr>
             {orderBook.buyOrders.map((order) => renderOrder(order, props))}
         </tbody>
@@ -53,7 +64,6 @@ const showOrderBook = (props) => {
 class OrderBook extends Component {
     render() {
         return(
-            <div className="vertical">
                 <div className="card bg-dark text-white">
                     <div className="card-header">
                         Order Book
@@ -64,9 +74,6 @@ class OrderBook extends Component {
                         </table>
                     </div>
                 </div>
-
-
-            </div>
         )
     }
 }
@@ -78,7 +85,9 @@ function mapStateToProps(state) {
     return {
         orderBook: orderBookSelector(state),
         showOrderBook: orderBookLoaded && !orderFilling,
+        web3: web3Selector(state),
         exchange: exchangeSelector(state),
+        token: tokenSelector(state),
         account: accountSelector(state)
     }
 }

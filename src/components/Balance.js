@@ -31,6 +31,8 @@ import {
     tokenWithdrawAmountChanged
 } from '../store/actions';
 
+import {dappNetwork, dappNetworkHex} from '../helpers'
+
 const createForm = (name, placeholder, amount, interaction, action, props, token) => {
     const {
         dispatch,
@@ -57,7 +59,7 @@ const createForm = (name, placeholder, amount, interaction, action, props, token
                 />
             </div>
             <div className="col-12 col-sm-auto pl-sm-0">
-                <button type="submit" className="btn btn-primary btn-block btn-sm">{name}</button>
+                <button type="submit" className="btn btn-secondary btn-block btn-sm">{name}</button>
             </div>
         </form>
     )
@@ -70,11 +72,7 @@ const showForm = (props) => {
         tokenBalance,
         exchangeEtherBalance,
         exchangeTokenBalance,
-        dispatch,
-        web3,
         token,
-        account,
-        exchange,
         etherDepositAmount,
         etherWithdrawAmount,
         tokenDepositAmount,
@@ -93,9 +91,9 @@ const showForm = (props) => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ETH</td>
-                            <td>{etherBalance}</td>
-                            <td>{exchangeEtherBalance}</td>
+                            <td style={{width:"30%"}}>ETH</td>
+                            <td style={{width:"35%"}}>{etherBalance}</td>
+                            <td style={{width:"35%"}}>{exchangeEtherBalance}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -103,9 +101,9 @@ const showForm = (props) => {
                 <table className="table table-dark table-sm small">
                     <tbody>
                         <tr>
-                            <td>DAPP</td>
-                            <td>{tokenBalance}</td>
-                            <td>{exchangeTokenBalance}</td>
+                            <td style={{width:"30%"}}>DAPP</td>
+                            <td style={{width:"35%"}}>{tokenBalance}</td>
+                            <td style={{width:"35%"}}>{exchangeTokenBalance}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -122,9 +120,9 @@ const showForm = (props) => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ETH</td>
-                            <td>{etherBalance}</td>
-                            <td>{exchangeEtherBalance}</td>
+                            <td style={{width:"30%"}}>ETH</td>
+                            <td style={{width:"35%"}}>{etherBalance}</td>
+                            <td style={{width:"35%"}}>{exchangeEtherBalance}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -132,9 +130,9 @@ const showForm = (props) => {
                 <table className="table table-dark table-sm small">
                     <tbody>
                         <tr>
-                            <td>DAPP</td>
-                            <td>{tokenBalance}</td>
-                            <td>{exchangeTokenBalance}</td>
+                            <td style={{width:"30%"}}>DAPP</td>
+                            <td style={{width:"35%"}}>{tokenBalance}</td>
+                            <td style={{width:"35%"}}>{exchangeTokenBalance}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -145,12 +143,15 @@ const showForm = (props) => {
 }
 
 class Balance extends Component {
-    componentWillMount() {
+    componentDidMount() {
         this.loadBlockchainData();
       }
       async loadBlockchainData() {
           const {dispatch, web3, exchange, token, account} = this.props;
-          await loadBalances(dispatch, web3, exchange, token, account);
+          const networkVersion = await window.ethereum.networkVersion;
+          if (networkVersion === dappNetwork) {
+            await loadBalances(dispatch, web3, exchange, token, account);
+        }
       }
 
     render() {
