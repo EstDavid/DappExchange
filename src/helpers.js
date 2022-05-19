@@ -4,6 +4,10 @@ export const DECIMALS = (10**18);
 export const GREEN = 'success';
 export const RED = 'danger';
 
+export const dappNetwork = '4';
+
+export const dappNetworkHex = '0x4';
+
 // Shorcut to avoid passing around web3 connection
 export const ether = (wei) => {
     if(wei) {
