@@ -2,10 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.css'
+import $ from 'jquery';
+import 'bootstrap';
 import App from './components/App';
 import configureStore from './store/configureStore';
-import { iteratee } from 'lodash';
 // import reportWebVitals from './reportWebVitals';
+
+// $(function() {
+//   $( "p" ).text( "The DOM is now loaded and can be manipulated." );
+//   });
+
+//   $(function() {
+//     $('dropdown-toggle').dropdown("show")
+//   });
+$('.dropdown-toggle').dropdown("toggle");
+  
+// $(document).popover
 
 ReactDOM.render(
   <Provider store={configureStore()}>
