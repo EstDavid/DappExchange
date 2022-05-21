@@ -37,7 +37,7 @@ import {
             interaction(dispatch, exchange, token, web3, order, account);
         }}>
             <div className="from-group small">
-                <label>{type} Amount (DAPP)</label>
+                <label>{type} Amount (DLP)</label>
                 <div className="input-group">
                     <input 
                     type="text"
