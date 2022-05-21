@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 import { accountSelector, navigationSelector } from '../store/selectors';
 import { 
     launchApp,
-    showHomepage
+    showHomepage,
+    loadWeb3,
+    loadAccount
 } from '../store/interactions';
 
-const showAccount = (account) => {
-    if (account !== null && account !== undefined) {
+const showAccount = (props) => {
+    const {account, dispatch} = props;
+    if (account !== undefined) {
         return (
             <a
                 className="account"
@@ -17,23 +20,14 @@ const showAccount = (account) => {
                 {account.substring(0, 4) + "...." + account.substring(account.length - 4, account.length)}
             </a>
         )
-    } else {
+    } else if (window.ethereum) {
         return (
             <li><button className="btn btn-success navbar-btn" onClick={(event) => {
                 event.preventDefault();
-                window.ethereum.request({ method: 'eth_requestAccounts' });
-            }}>Connect account</button>
-            </li>
-        )
-    }
-}
-
-const connectAccountButton = (account) => {
-    if (account === undefined) {
-        return (
-            <li><button className="btn btn-success navbar-btn" onClick={(event) => {
-                event.preventDefault();
-                window.ethereum.request({ method: 'eth_requestAccounts' });
+                window.ethereum.request({ method: 'eth_requestAccounts' }).then(async () => {
+                    const web3 = await loadWeb3(dispatch);
+                    await loadAccount(web3, dispatch)
+                });
             }}>Connect account</button>
             </li>
         )
@@ -43,20 +37,20 @@ const connectAccountButton = (account) => {
 const showNavigationButton = (props) => {
     if (props.showApp) {
         return(
-            <ul className="navbar navbar-nav navbar-right" style={{ display: "inline" }}>
+            <ul className="navbar navbar-nav navbar-right navbar-expand-sm" style={{ display: "inline" }}>
                 <li><button className="btn btn-warning navbar-btn" onClick={(event) => {
                     event.preventDefault();
                     showHomepage(props.dispatch);
                 }}>Back to Homepage</button>
                 </li>
                 <li className="nav-item">
-                {showAccount(props.account)}
+                {showAccount(props)}
                 </li>
             </ul>
         )
     } else {
         return(
-            <ul className="navbar navbar-nav navbar-right" style={{ display: "inline" }}>
+            <ul className="navbar navbar-nav navbar-right navbar-expand-sm" style={{ display: "inline" }}>
                 <li><button className="btn btn-warning navbar-btn" onClick={(event) => {
                     event.preventDefault();
                     launchApp(props.dispatch);
@@ -71,7 +65,7 @@ class Navbar extends Component {
     
     render() {
         return (
-            <nav className="navbar navbar-dark" style={{ backgroundColor: "#01B0D3"}}>
+            <nav className="navbar navbar-expand-sm navbar-dark" style={{ backgroundColor: "#01B0D3"}}>
                 <div className="container-fluid">
                     <div className="navbar-header">
                     <img src="Dolphin_Logo.svg" height="60" alt="Dolhpinance Logo"></img>
