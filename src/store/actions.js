@@ -27,6 +27,12 @@ export function web3AccountLoaded(account) {
     }
 }
 
+export function web3AccountUnloaded() {
+    return {
+        type: 'WEB3_ACCOUNT_UNLOADED',
+    }
+}
+
 // TOKEN
 export function tokenLoaded (contract) {
     return {
@@ -35,11 +41,23 @@ export function tokenLoaded (contract) {
     }
 }
 
+export function tokenUnloaded () {
+    return {
+        type: 'TOKEN_UNLOADED',
+    }
+}
+
 // EXCHANGE
 export function exchangeLoaded(contract) {
     return {
         type: 'EXCHANGE_LOADED',
         contract
+    }
+}
+
+export function exchangeUnloaded() {
+    return {
+        type: 'EXCHANGE_UNLOADED'
     }
 }
 

@@ -6,8 +6,11 @@ import {
     appRequested,
     homepageRequested,
     web3AccountLoaded,
+    web3AccountUnloaded,
     tokenLoaded,
+    tokenUnloaded,
     exchangeLoaded,
+    exchangeUnloaded,
     cancelledOrdersLoaded,
     filledOrdersLoaded,
     allOrdersLoaded,
@@ -31,12 +34,12 @@ import BigNumber from 'bignumber.js';
 
 export const loadWeb3 = async (dispatch) => {
     if(typeof window.ethereum!==undefined){
-        try {
+/*         try {
             await window.ethereum.request({method: 'eth_requestAccounts'});
         }
         catch(error) {
             window.alert('No network selected')
-        }
+        } */
         const web3 = new Web3(window.ethereum);        
         dispatch(web3Loaded(web3));
         return web3
@@ -56,14 +59,19 @@ export const showHomepage = async (dispatch) => {
 
 export const loadAccount = async (web3, dispatch) => {
     const accounts = await web3.eth.getAccounts();
-    const account = await accounts[0];
-    if(typeof account !== 'undefined'){
+    const account = accounts[0];
+    if(typeof account !== 'undefined' && account !== undefined){
         dispatch(web3AccountLoaded(account))
         return account;
     } else {
-        window.alert('Please login with MetaMask')
-        return null;
+        // window.alert('Please login with MetaMask')
+        dispatch(web3AccountLoaded(undefined))
+        return undefined;
     }
+}
+
+export const unloadAccount = async (dispatch) => {
+    dispatch(web3AccountUnloaded());
 }
 
 export const loadToken = async (web3, networkId, dispatch) => {
@@ -72,10 +80,14 @@ export const loadToken = async (web3, networkId, dispatch) => {
         dispatch(tokenLoaded(token));
         return token;
     }
-    catch(error) {
+    catch (error) {
         console.log(`Token contract not deployed to the current network. Please select another network with Metamask.`);
         return null;
+    }
 }
+
+export const unloadToken = async (dispatch) => {
+    dispatch(tokenUnloaded());
 }
 
 export const loadExchange = async (web3, networkId, dispatch) => {
@@ -88,6 +100,10 @@ export const loadExchange = async (web3, networkId, dispatch) => {
         console.log(`Exchange contract not deployed to the current network. Please select another network with Metamask.`);
     }
     return null;
+}
+
+export const unloadExchange = async (dispatch) => {
+    dispatch(exchangeUnloaded());
 }
 
 export const loadAllOrders = async (exchange, dispatch) => {
@@ -145,25 +161,27 @@ export const cancelOrder = (dispatch, exchange, order, account) => {
 
 export const accountChanged = async (dispatch, web3, exchange, token) => {
     const account = await loadAccount(web3, dispatch);
-    dispatch(balancesLoading());
-    let exchangeEtherBalance = exchange.methods.balanceOf(ETHER_ADDRESS, account).call();
-    let accountEtherBalance = web3.eth.getBalance(account);
-    let exchangeTokenBalance = exchange.methods.balanceOf(token.options.address, account).call();
-    let accountTokenBalance = token.methods.balanceOf(account).call();
-
-    exchangeEtherBalance.then((balanceValue) => {
-        dispatch(exchangeEtherBalanceLoaded(balanceValue))
-    });
-    accountEtherBalance.then((balanceValue) => {
-        dispatch(etherBalanceLoaded(balanceValue))
-    });
-    exchangeTokenBalance.then((balanceValue) => {
-        dispatch(exchangeTokenBalanceLoaded(balanceValue))
-    });
-    accountTokenBalance.then((balanceValue) => {
-        dispatch(tokenBalanceLoaded(balanceValue))
-    });
-    dispatch(balancesLoaded());
+    if (account !== undefined) {
+        dispatch(balancesLoading());
+        let exchangeEtherBalance = exchange.methods.balanceOf(ETHER_ADDRESS, account).call();
+        let accountEtherBalance = web3.eth.getBalance(account);
+        let exchangeTokenBalance = exchange.methods.balanceOf(token.options.address, account).call();
+        let accountTokenBalance = token.methods.balanceOf(account).call();
+    
+        exchangeEtherBalance.then((balanceValue) => {
+            dispatch(exchangeEtherBalanceLoaded(balanceValue))
+        });
+        accountEtherBalance.then((balanceValue) => {
+            dispatch(etherBalanceLoaded(balanceValue))
+        });
+        exchangeTokenBalance.then((balanceValue) => {
+            dispatch(exchangeTokenBalanceLoaded(balanceValue))
+        });
+        accountTokenBalance.then((balanceValue) => {
+            dispatch(tokenBalanceLoaded(balanceValue))
+        });
+        dispatch(balancesLoaded());
+    }
 }
 
 export const fillOrder = async (dispatch, web3, exchange, token, order, account) => {
