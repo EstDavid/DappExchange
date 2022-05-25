@@ -81,7 +81,7 @@ class DefaultContent extends Component {
                                                 target="_blank"
                                                 rel="noreferrer noopener"> here</a></p>
                                         <p className="card-text">&#x2611;
-                                            <button className="btn btn-warning btn-sm" style={{"margin-left":"10px"}} onClick={(event) => {
+                                            <button className="btn btn-warning btn-sm" style={{"marginLeft":"10px"}} onClick={(event) => {
                                                 event.preventDefault();
                                                 launchApp(this.props.dispatch);
                                             }}>Launch App</button>

@@ -2,12 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.css'
-import $ from 'jquery';
-import 'bootstrap';
 import App from './components/App';
 import configureStore from './store/configureStore';
-
-$('.dropdown-toggle').dropdown("toggle");
+import * as serviceWorker from './serviceWorker'
 
 ReactDOM.render(
   <Provider store={configureStore()}>
@@ -15,3 +12,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+serviceWorker.unregister()
