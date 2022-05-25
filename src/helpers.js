@@ -4,8 +4,8 @@ export const DECIMALS = (10**18);
 export const GREEN = 'success';
 export const RED = 'danger';
 
+// Establishing the Rinkeby as the reference network for the Dapp
 export const dappNetwork = '4';
-
 export const dappNetworkHex = '0x4';
 
 // Shorcut to avoid passing around web3 connection

@@ -11,7 +11,7 @@ import {
     accountSelector,
     orderFillingSelector
 } from '../store/selectors';
-import { fillOrder, loadBalances } from '../store/interactions';
+import { fillOrder } from '../store/interactions';
 
 const renderOrder = (order, props) => {
     const { dispatch, web3, exchange, token, account } = props;
@@ -63,9 +63,9 @@ const showOrderBook = (props) => {
 
 class OrderBook extends Component {
     render() {
-        return(
-                <div className="card bg-dark text-white">
-                                    <OverlayTrigger
+        return (
+            <div className="card bg-dark text-white">
+                <OverlayTrigger
                     placement='auto'
                     overlay={
                         <Tooltip>
@@ -73,17 +73,17 @@ class OrderBook extends Component {
                         </Tooltip>
                     }
                 >
-                                        <div className="card-header">
+                    <div className="card-header">
                         Order Book
                     </div>
                 </OverlayTrigger>
 
-                    <div className="card-body order-book">
-                        <table className="table table-dark table-sm small">
-                            {this.props.showOrderBook ? showOrderBook(this.props) : <Spinner type='table' />}
-                        </table>
-                    </div>
+                <div className="card-body order-book">
+                    <table className="table table-dark table-sm small">
+                        {this.props.showOrderBook ? showOrderBook(this.props) : <Spinner type='table' />}
+                    </table>
                 </div>
+            </div>
         )
     }
 }
