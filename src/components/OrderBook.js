@@ -65,9 +65,19 @@ class OrderBook extends Component {
     render() {
         return(
                 <div className="card bg-dark text-white">
-                    <div className="card-header">
+                                    <OverlayTrigger
+                    placement='auto'
+                    overlay={
+                        <Tooltip>
+                            {`Here you can see the current active limit orders. Click on the lowest ask to buy at cheapest price or the highest bid to sell at the highest price`}
+                        </Tooltip>
+                    }
+                >
+                                        <div className="card-header">
                         Order Book
                     </div>
+                </OverlayTrigger>
+
                     <div className="card-body order-book">
                         <table className="table table-dark table-sm small">
                             {this.props.showOrderBook ? showOrderBook(this.props) : <Spinner type='table' />}

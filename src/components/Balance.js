@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Spinner from './Spinner';
-import { Tabs, Tab } from 'react-bootstrap';
+import { Tabs, Tab, OverlayTrigger, Tooltip} from 'react-bootstrap';
 import { 
     loadBalances,
     depositEther,
@@ -31,7 +31,7 @@ import {
     tokenWithdrawAmountChanged
 } from '../store/actions';
 
-import {dappNetwork, dappNetworkHex} from '../helpers'
+import {dappNetwork} from '../helpers'
 
 const createForm = (name, placeholder, amount, interaction, action, props, token) => {
     const {
@@ -84,7 +84,7 @@ const showForm = (props) => {
                 <table className="table table-dark table-sm small">
                     <thead>
                         <tr>
-                            <th>Token</th>
+                            <th>Coin</th>
                             <th>Wallet</th>
                             <th>Exchange</th>
                         </tr>
@@ -101,19 +101,19 @@ const showForm = (props) => {
                 <table className="table table-dark table-sm small">
                     <tbody>
                         <tr>
-                            <td style={{width:"30%"}}>DAPP</td>
+                            <td style={{width:"30%"}}>DLP</td>
                             <td style={{width:"35%"}}>{tokenBalance}</td>
                             <td style={{width:"35%"}}>{exchangeTokenBalance}</td>
                         </tr>
                     </tbody>
                 </table>
-                {createForm("Deposit", "Token Amount", tokenDepositAmount, depositToken, tokenDepositAmountChanged, props, token)}
+                {createForm("Deposit", "DLP token Amount", tokenDepositAmount, depositToken, tokenDepositAmountChanged, props, token)}
             </Tab>
             <Tab eventKey="whitdraw" title="Withdraw" className="bg-dark">
                 <table className="table table-dark table-sm small">
                     <thead>
                         <tr>
-                            <th>Token</th>
+                            <th>Coin</th>
                             <th>Wallet</th>
                             <th>Exchange</th>
                         </tr>
@@ -130,13 +130,13 @@ const showForm = (props) => {
                 <table className="table table-dark table-sm small">
                     <tbody>
                         <tr>
-                            <td style={{width:"30%"}}>DAPP</td>
+                            <td style={{width:"30%"}}>DLP</td>
                             <td style={{width:"35%"}}>{tokenBalance}</td>
                             <td style={{width:"35%"}}>{exchangeTokenBalance}</td>
                         </tr>
                     </tbody>
                 </table>
-                {createForm("Withdraw", "DAPP Amount", tokenWithdrawAmount, withdrawToken, tokenWithdrawAmountChanged, props, token)}
+                {createForm("Withdraw", "DLP Token Amount", tokenWithdrawAmount, withdrawToken, tokenWithdrawAmountChanged, props, token)}
             </Tab>
         </Tabs>
     )
@@ -145,21 +145,30 @@ const showForm = (props) => {
 class Balance extends Component {
     componentDidMount() {
         this.loadBlockchainData();
-      }
-      async loadBlockchainData() {
-          const {dispatch, web3, exchange, token, account} = this.props;
-          const networkVersion = await window.ethereum.networkVersion;
-          if (networkVersion === dappNetwork) {
+    }
+    async loadBlockchainData() {
+        const { dispatch, web3, exchange, token, account } = this.props;
+        const networkVersion = await window.ethereum.networkVersion;
+        if (networkVersion === dappNetwork) {
             await loadBalances(dispatch, web3, exchange, token, account);
         }
-      }
+    }
 
     render() {
-        return(
+        return (
             <div className="card bg-dark text-white">
-                <div className="card-header">
-                    Balance
-                </div>
+                <OverlayTrigger
+                    placement='auto'
+                    overlay={
+                        <Tooltip>
+                            {`In order to start trading DLP token you need to first deposit some ETH on the exchange`}
+                        </Tooltip>
+                    }
+                >
+                    <div className="card-header">
+                        Balance
+                    </div>
+                </OverlayTrigger>
                 <div className="card-body">
                     {this.props.showForm ? showForm(this.props) : <Spinner />}
                 </div>

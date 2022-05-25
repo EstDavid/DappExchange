@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Spinner from './Spinner';
-import { Tabs, Tab } from 'react-bootstrap';
+import { Tabs, Tab, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import BigNumber from 'bignumber.js';
 import { 
     makeBuyOrder,
@@ -81,13 +81,23 @@ const showForm = (props) => {
 
 class NewOrder extends Component {
     render() {
-        return(
+        return (
             <div className="card bg-dark text-white">
-                <div className="card-header">
-                    New Order
-                </div>
+                <OverlayTrigger
+                    placement='auto'
+                    overlay={
+                        <Tooltip>
+                            {`First select whether you want to Buy or Sell the DLP token and then specify the quantity of DLP and the price (DLP/ETH ratio or ETH per unit of DLP)`}
+                        </Tooltip>
+                    }
+                >
+                    <div className="card-header">
+                        New Order
+                    </div>
+
+                </OverlayTrigger>
                 <div className="card-body">
-                    {this.props.showForm ? showForm(this.props) : <Spinner/>}
+                    {this.props.showForm ? showForm(this.props) : <Spinner />}
                 </div>
             </div>
         )
