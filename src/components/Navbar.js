@@ -37,12 +37,7 @@ const showAccount = (props) => {
 const showNavigationButton = (props) => {
     if (props.showApp) {
         return(
-            <ul className="navbar navbar-nav navbar-right navbar-expand-sm" style={{ display: "inline" }}>
-                <li><button className="btn btn-warning navbar-btn" onClick={(event) => {
-                    event.preventDefault();
-                    showHomepage(props.dispatch);
-                }}>Back to Homepage</button>
-                </li>
+            <ul className="nav navbar-nav navbar-expand-sm" style={{ display: "inline" }}>
                 <li className="nav-item">
                 {showAccount(props)}
                 </li>
@@ -50,7 +45,7 @@ const showNavigationButton = (props) => {
         )
     } else {
         return(
-            <ul className="navbar navbar-nav navbar-right navbar-expand-sm" style={{ display: "inline" }}>
+            <ul className="nav navbar-nav navbar-expand-sm" style={{ display: "inline" }}>
                 <li><button className="btn btn-warning navbar-btn" onClick={(event) => {
                     event.preventDefault();
                     launchApp(props.dispatch);
@@ -62,35 +57,17 @@ const showNavigationButton = (props) => {
 }
 
 class Navbar extends Component {
-    
     render() {
         return (
-            <nav className="navbar navbar-expand-sm navbar-dark" style={{ backgroundColor: "#01B0D3"}}>
+            <nav className="nav navbar navbar-expand-sm navbar-dark" style={{ backgroundColor: "#01B0D3" }}>
                 <div className="container-fluid">
                     <div className="navbar-header">
-                    <img src="Dolphin_Logo.svg" height="60" alt="Dolhpinance Logo"></img>
-                        <a className="navbar-brand" href="/#"><h1>Dol<small>Phinance</small></h1></a>
-                        {/* {<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>} */}
-
-
+                        <img src="Dolphin_Logo.svg" height="60" alt="Dolphinance Logo"></img>
+                        <a className="navbar-brand" href="/#" onClick={(event) => {
+                            event.preventDefault();
+                            showHomepage(this.props.dispatch);
+                        }}><h1>DolPhinance</h1></a>
                     </div>
-                    {/* <ul className="nav navbar-nav">
-                        <li className="dropdown">
-                            <button className="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">Select Network
-                                <span className="caret"></span></button>
-                            <ul className="dropdown-menu">
-                                <li><a>Rinkeby</a></li>
-                                <li><a>Local</a></li>
-                            </ul>
-                        </li>
-                        <li className="btn">
-                            <button className="btn btn-secondary" type="button" >Connect wallet
-                            </button>
-                        </li>
-
-                    </ul> */}
                     {showNavigationButton(this.props)}
                 </div>
             </nav>
