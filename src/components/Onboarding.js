@@ -2,7 +2,7 @@ import MetaMaskOnboarding from '@metamask/onboarding';
 import React from 'react';
 
 const ONBOARD_TEXT = 'Click here to install MetaMask';
-const CONNECT_TEXT = 'Connect';
+const CONNECT_TEXT = 'Connect Metamask';
 const CONNECTED_TEXT = 'Connected';
 
 export function OnboardingButton() {
@@ -30,7 +30,7 @@ export function OnboardingButton() {
     }
   }, [accounts]);
 
-  React.useEffect(() => {
+/*   React.useEffect(() => {
     function handleNewAccounts(newAccounts) {
       setAccounts(newAccounts);
     }
@@ -43,7 +43,7 @@ export function OnboardingButton() {
         window.ethereum.removeListener('accountsChanged', handleNewAccounts)
       };
     }
-  }, []);
+  }, []); */
 
   const onClick = () => {
     if (MetaMaskOnboarding.isMetaMaskInstalled()) {
@@ -55,7 +55,7 @@ export function OnboardingButton() {
     }
   };
   return (
-    <button className="btn btn-primary btn-sm" disabled={isDisabled} onClick={onClick}>
+    <button className="btn btn-primary alert-button btn-sm" disabled={isDisabled} onClick={onClick}>
       {buttonText}
     </button>
   );
