@@ -1,8 +1,28 @@
+body {
+  background-color: #333f50;
+}
+
 nav li {
   padding: 0 6px;
   display: inline-grid;
   align-items:center;
 
+}
+
+footer {
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
+}
+
+footer img {
+  height: 45px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.filter-blue:hover {
+  filter: invert(52%) sepia(81%) saturate(1418%) hue-rotate(150deg) brightness(92%) contrast(99%);
 }
 
 .account {
@@ -15,9 +35,9 @@ nav li {
 }
 
 .homepage {
-  background-color: #333f50;
-  position: absolute;
-  top: 87px;
+  /* background-color: #ffffff; */
+  position: relative;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -36,7 +56,7 @@ nav li {
 }
 
 .content  {
-    background-color: #1d1d1d;
+    /* background-color: #1d1d1d; */
     position: absolute;
     top: 87px;
     left: 0;
@@ -50,6 +70,15 @@ nav li {
     padding: 8px;
     z-index: 1
   }
+
+.navbar-brand {
+  margin: 0;
+  padding-left: 6px;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
 
   .content > div {
     width: 20%;
@@ -133,6 +162,10 @@ nav li {
     flex-wrap: nowrap;
   }
 
+  .card a {
+    color: #a4cfff;
+  }
+
   .homepage-card {
     color: white;
     border-radius: 16px;
@@ -160,16 +193,24 @@ nav li {
     justify-content: space-evenly;
   }
 
-  .homepage-card-body {
+  .homepage .card-body {
     /* padding: 8px 4px; */
-    margin: 2px;
-    min-height: 120px;
+    padding-bottom: 16px;
+    min-height: 230px;
     background-color: #575555;
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
-    /* display: block;
+    display: block;
     align-items:center;
-    justify-content: space-evenly; */
+    justify-content: space-evenly;
+  }
+
+  .homepage .card-body p {
+    padding-left: 16px;
+    padding-right: 4px;
+    text-align: left;
+    margin-top: 6px;
+    margin-bottom: 12px;
   }
   
   .alert-button {
