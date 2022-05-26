@@ -5,6 +5,10 @@
   "author": "dev@dappuniversity.com",
   "private": true,
   "homepage": ".",
+  "engines": {
+    "node": "10.19.0",
+    "npm": "6.13.4"
+  },
   "dependencies": {
     "@metamask/onboarding": "^1.0.1",
     "@truffle/hdwallet-provider": "^1.7.0",
