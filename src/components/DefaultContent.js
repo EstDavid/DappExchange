@@ -55,11 +55,12 @@ class DefaultContent extends Component {
                                         <h1>Fully operational</h1>
                                     </div>
                                     <div className="card-body homepage-card-body">
-                                        <p className="card-text">&#x1F42C; Buy and sell DLP token with ETH by placing limit orders or filling the existing ones
+                                        <p className="card-text"><span role="img" aria-label="dolphin">&#x1F42C; </span>
+                                        Buy and sell DLP token with ETH by placing limit orders or filling the existing ones
                                         </p>
-                                        <p className="card-text">&#x1F6D1; Cancel your open orders at any time</p>
-                                        <p className="card-text">&#x1F4B0; Make deposits and withdrawals on the exchange</p>
-                                        <p className="card-text">&#x1F4C8; Track the price of the DLP token</p>
+                                        <p className="card-text"><span role="img" aria-label="Money bag">&#x1F4B0; </span>Make deposits and withdrawals on the exchange</p>
+                                        <p className="card-text"><span role="img" aria-label="dolphin">&#x1F4C8; </span>Track the price of the DLP token</p>
+                                        <p className="card-text"><span role="img" aria-label="stop">&#x1F6D1; </span>Cancel your open orders at any time</p>
                                     </div>
                                 </div>
                             </div>
@@ -69,10 +70,10 @@ class DefaultContent extends Component {
                                         <h1>Get started</h1>
                                     </div>
                                     <div className="card-body homepage-card-body">
-                                        <p className="card-text">&#x2611; Get Metamask
+                                        <p className="card-text"><span role="img" aria-label="check mark">&#x2611; </span>Get Metamask
                                             <OnboardingButton /></p>
-                                        <p className="card-text">&#x2611; Switch to the Rinkeby network on your Metamask</p>
-                                        <p className="card-text">&#x2754; First time on Rinkeby Network? You can get Rinkeby ETH
+                                        <p className="card-text"><span role="img" aria-label="check mark">&#x2611; </span>Switch to the Rinkeby network on your Metamask</p>
+                                        <p className="card-text"><span role="img" aria-label="question mark">&#x2754; </span>First time on Rinkeby Network? You can get Rinkeby ETH
                                             <a href="https://rinkebyfaucet.com/"
                                                 target="_blank"
                                                 rel="noreferrer noopener"> here </a>
@@ -80,7 +81,7 @@ class DefaultContent extends Component {
                                             <a href="https://faucet.rinkeby.io/"
                                                 target="_blank"
                                                 rel="noreferrer noopener"> here</a></p>
-                                        <p className="card-text">&#x2611;
+                                        <p className="card-text"><span role="img" aria-label="check mark">&#x2611; </span>
                                             <button className="btn btn-warning btn-sm" style={{"marginLeft":"10px"}} onClick={(event) => {
                                                 event.preventDefault();
                                                 launchApp(this.props.dispatch);
