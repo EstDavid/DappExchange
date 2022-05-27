@@ -9,6 +9,14 @@ nav li {
 
 }
 
+.navbar {
+  z-index: 2;
+}
+
+.navbar-collapse {
+  margin-top: 30px;
+}
+
 footer {
   text-align: center;
   color: white;
@@ -55,6 +63,7 @@ footer img {
   text-align: center;
 }
 
+
 .content  {
     /* background-color: #1d1d1d; */
     position: absolute;
@@ -73,11 +82,21 @@ footer img {
 
 .navbar-brand {
   margin: 0;
-  padding-left: 6px;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+  padding: 4px;
+  position: relative;
+  display: flex;
+}
+
+.navbar img {
+  padding-right: 8px;
+}
+
+.navbar h2 {
+  margin: auto;
+}
+
+#navbarToggler {
+  text-align: right;
 }
 
   .content > div {
@@ -162,20 +181,36 @@ footer img {
     flex-wrap: nowrap;
   }
 
-  .card a {
-    color: #a4cfff;
-  }
+    .card a {
+      color: #a4cfff;
+    }
+
+    .homepage .row {
+      display: flex;
+      flex-direction:row;
+      flex-wrap: nowrap;
+    }
+
+    @media (max-width:768px) {
+      .homepage .row {
+        flex-direction: column;
+      }
+    }
+
+    .homepage .col {
+      margin: 8px 0;
+    }
 
   .homepage-card {
     color: white;
     border-radius: 16px;
     background-color: #3a3838;
     align-items:center;
-    justify-content: space-evenly;
-    /* display: block;
-    flex-direction: column;
-    justify-content: space-evenly;
-    flex-wrap: nowrap; */
+    /* justify-content: space-evenly; */
+    display: block;
+/*     flex-direction: column;
+    justify-content: space-evenly; */
+    flex-wrap: wrap;
   }
 
   .card-header {
