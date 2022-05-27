@@ -46,7 +46,7 @@ const showNavigationButton = (props) => {
     } else {
         return(
             <ul className="nav navbar-nav navbar-expand-sm" style={{ display: "inline" }}>
-                <li><button className="btn btn-warning navbar-btn" onClick={(event) => {
+                <li><button className="btn btn-warning navbar-btn" style={{"white-space": "nowrap"}} onClick={(event) => {
                     event.preventDefault();
                     launchApp(props.dispatch);
                 }}>Launch App</button>
@@ -61,13 +61,18 @@ class Navbar extends Component {
         return (
             <nav className="nav navbar navbar-expand-sm navbar-dark" style={{ backgroundColor: "#01B0D3" }}>
                 <div className="container-fluid">
-                    <div className="navbar-header">
-                        <img src="Dolphin_Logo.svg" height="60" alt="Dolphinance Logo"></img>
-                        <a className="navbar-brand" href="/#" onClick={(event) => {
-                            event.preventDefault();
-                            showHomepage(this.props.dispatch);
-                        }}><h1>DolPhinance</h1></a>
-                    </div>
+                    <a className="navbar-brand" href="#" onClick={(event) => {
+                        event.preventDefault();
+                        showHomepage(this.props.dispatch);
+                    }}>
+                        <img src="Dolphin_Logo.svg" height="60" alt="Dolphinance Logo" className="d-inline-block align-top"></img>
+                        <h2>DolPhinance</h2>
+                    </a>
+                    <button className="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <div className="collapse navbar-collapse" id="navbarToggler">
                     {showNavigationButton(this.props)}
                 </div>
             </nav>
