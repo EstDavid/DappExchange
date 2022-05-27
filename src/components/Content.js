@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { 
     accountSelector,
@@ -15,8 +15,8 @@ import {
     subscribeToEvents,
     accountChanged, 
     unloadToken,
-    unloadExchange,
-    unloadAccount} from '../store/interactions';
+    unloadExchange
+} from '../store/interactions';
 import Trades from './Trades';
 import OrderBook from './OrderBook';
 import MyTransactions from './MyTransactions';
