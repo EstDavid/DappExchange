@@ -22,7 +22,7 @@ const showAccount = (props) => {
         )
     } else if (window.ethereum) {
         return (
-            <li><button className="btn btn-success navbar-btn" onClick={(event) => {
+            <li><button className="btn btn-success navbar-btn" style={{"white-space": "nowrap"}} onClick={(event) => {
                 event.preventDefault();
                 window.ethereum.request({ method: 'eth_requestAccounts' }).then(async () => {
                     const web3 = await loadWeb3(dispatch);
