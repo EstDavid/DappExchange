@@ -13,7 +13,7 @@ class DefaultContent extends Component {
                     <div className="page-header container">
                         <div className="row gx-20">
                             <div className="col-sm-6">
-                                <img className="img" src="Dolphin_Mesh.svg" alt="DolPhinance Mesh" style={{ height: "220px" }}></img>
+                                <img className="img" src="./images/Dolphin_Mesh.svg" alt="DolPhinance Mesh" style={{ height: "220px" }}></img>
                             </div>
                             <div className="col-sm-6">
                                 <div className="text-center homepage-text">

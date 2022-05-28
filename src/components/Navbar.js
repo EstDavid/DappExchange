@@ -61,11 +61,11 @@ class Navbar extends Component {
         return (
             <nav className="nav navbar navbar-expand-sm navbar-dark" style={{ backgroundColor: "#01B0D3" }}>
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="#" onClick={(event) => {
+                    <a className="navbar-brand" href="/#" onClick={(event) => {
                         event.preventDefault();
                         showHomepage(this.props.dispatch);
                     }}>
-                        <img src="Dolphin_Logo.svg" height="60" alt="Dolphinance Logo" className="d-inline-block align-top"></img>
+                        <img src="./images/Dolphin_Logo.svg" height="60" alt="Dolphinance Logo" className="d-inline-block align-top"></img>
                         <h2>DolPhinance</h2>
                     </a>
                     <button className="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
