@@ -24,3 +24,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+ContractsDeployment.md
+src/components/Logo/
+src/components/NavbarTest.js
