@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# About Dolphinance dApp Exchange
+The Dolphinance dApp is an order book exchange which allows withdrawal and deposit operations of both ETH and the native DLP token. It also allows creating, filling and cancelling limit orders to trade between the two coins. 
+The exchange is based on the Capstone Project from the [Dapp University Bootcamp](https://www.dappuniversity.com/bootcamp)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Frontend
+The frontend of the exchange has been created using ReactJS, Redux and Bootstrap. It consists of 3 basic elements:
+- Welcome page with the exchange logo and info about the project
+- Exchange page with all the functionality for interaction with the exchange and order info display
+- Metamask Onboarding button for managing interaction between the user's wallet and the dApp
 
-## Available Scripts
+## Metamask Onboarding
+Some parts of the [Metamask Onboarding Library](https://docs.metamask.io/guide/onboarding-library.html) and recommended process are used for managing the interaction with the user's wallet.
+The web app detects whether the Metamask extension is installed in the browser. It then checks if there is an account connected and if not, it allows the user to click on the Onboarding button to connect their account. It also checks that the network configured in Metamask is the same as the one where the Exchange smart contracts are. If the correct network is not selected, it allows the user to change the network automatically.
 
-In the project directory, you can run:
+# Backend
+## Token smart contract
+The token smart contract follows the ERC-20 standard. The total supply of the token is 1000000 units which can be expressed in up to 18 decimals.
+The contract address on the Rinkeby test network is 0x664c8fCF50A588D3208c729362685EA911522198.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Exchange smart contract
+The exchange smart contract has the following main functions,  variables and events.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Deposit and withdraw functions:
++ `depositEther` &rarr; Deposits Eth from the user's wallet to the exchange
++ `withdrawEther` &rarr; Allows the user to withdraw Eth from their exchange balance to their wallet
++ `depositToken` &rarr; Deposits DLP token from the user's to the exchange
++ `withdrawToken` &rarr; Allows the user to withdraw units of DLP token from their exchange balance to their own wallet
 
-### `npm test`
+### Order functions:
++ `makeOrder` &rarr; Creates an order to exchange the DLP token for ETH or viceversa
++ `cancelOrder` &rarr; Cancels an existing order if msg.sender is the original user who created it
++ `fillOrder` &rarr; Fills an open order
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Variables
++ `_Order` &rarr; This struct stores essential order information, such as address of the user creating the order, addresses of the two tokens involved in the order, the quantities of each (thus making the price for the order) and the timestamp
++ `feeAccount` &rarr; Address of the account that receives the exchange fees
++ `feePercent` &rarr; Fee percentage that the exchange receives for transactions
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Events
++ `Order` &rarr; Event fired when an order is created. It includes basic data about the order
++ `Cancel` &rarr; Fired when an order is cancelled
++ `Trade` &rarr; Fired when an order is filled. It includes the basic data about the order and the address of the user filling the order
