@@ -1,5 +1,6 @@
 # About Dolphinance dApp Exchange
 The Dolphinance dApp is an order book exchange which allows withdrawal and deposit operations of both ETH and the native DLP token. It also allows creating, filling and cancelling limit orders to trade between the two coins. 
+
 The exchange is based on the Capstone Project from the [Dapp University Bootcamp](https://www.dappuniversity.com/bootcamp)
 
 # Frontend
@@ -15,11 +16,14 @@ The web app detects whether the Metamask extension is installed in the browser. 
 # Backend
 ## Token smart contract
 The token smart contract follows the ERC-20 standard. The total supply of the token is 1000000 units which can be expressed in up to 18 decimals.
-The contract address on the Rinkeby test network is 0x664c8fCF50A588D3208c729362685EA911522198.
+
+The contract address on the Rinkeby test network is [0x664c8fCF50A588D3208c729362685EA911522198](https://rinkeby.etherscan.io/address/0x664c8fcf50a588d3208c729362685ea911522198)
 
 
 ## Exchange smart contract
-The exchange smart contract has the following main functions,  variables and events.
+The exchange smart contract address on the Rinkeby test network is [0x6723E472b9DE9b329F344aa6c8DC80e67DB92De8](https://rinkeby.etherscan.io/address/0x6723E472b9DE9b329F344aa6c8DC80e67DB92De8)
+
+The contract includes the following main functions,  variables and events.
 
 ### Deposit and withdraw functions:
 + `depositEther` &rarr; Deposits Eth from the user's wallet to the exchange
